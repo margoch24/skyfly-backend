@@ -1,0 +1,6 @@
+flask
+flask-sqlalchemy
+flask-bcrypt
+flask-restful
+python-dotenv
+marshmallow
