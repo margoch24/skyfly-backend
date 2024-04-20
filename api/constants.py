@@ -1,4 +1,4 @@
-from helpers.request_validator import (
+from api.helpers.request_validator import (
     BodyRequestValidator,
     QueryRequestValidator,
     RequestValidatorTypes,
