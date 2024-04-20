@@ -68,33 +68,33 @@ pipenv run start
 
 ### Development / Production
 
-0. Enter mysql:
+1. Enter mysql:
 
 ```bash
 mysql -u root -p
 ```
 
-1. Create mysql database:
+2. Create mysql database:
 
 ```bash
 CREATE DATABASE skyfly;
 ```
 
-2. Create new mysql user with a password requirement
+3. Create new mysql user with a password requirement
 
 ```bash
 CREATE USER 'skyfly'@'localhost';
 ALTER USER 'skyfly'@'localhost' IDENTIFIED WITH mysql_native_password BY '[your password here]';
 ```
 
-3. grant privileges to this user for database 'skyfly'
+4. grant privileges to this user for database 'skyfly'
 
 ```bash
 GRANT ALL PRIVILEGES ON skyfly. * TO 'skylfy'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-4. exit mysql
+5. exit mysql
 
 ```bash
 exit;
@@ -102,33 +102,33 @@ exit;
 
 ### Test
 
-0. Enter mysql:
+1. Enter mysql:
 
 ```bash
 mysql -u root -p
 ```
 
-1. Create mysql database:
+2. Create mysql database:
 
 ```bash
 CREATE DATABASE test_skyfly;
 ```
 
-2. Create new mysql user without a password requirement
+3. Create new mysql user without a password requirement
 
 ```bash
 CREATE USER 'test-skyfly'@'localhost';
 ALTER USER 'test-skyfly'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
 ```
 
-3. grant privileges to this user for database 'test_skyfly'
+4. grant privileges to this user for database 'test_skyfly'
 
 ```bash
-   GRANT ALL PRIVILEGES ON test_skyfly. * TO 'test-skylfy'@'localhost';
-   FLUSH PRIVILEGES;
+GRANT ALL PRIVILEGES ON test_skyfly. * TO 'test-skylfy'@'localhost';
+FLUSH PRIVILEGES;
 ```
 
-4. exit mysql
+5. exit mysql
 
 ```bash
 exit;
@@ -144,7 +144,7 @@ pipenv run test
 
 ### Run single test
 
-1. add `_only` to the end of the method name of the test you want to test.
+1. add `_only` to the end of the method name of the test you want to test.<br>
    *def test_successful(self) ---> def test_successful_only(self)*
 
 2. run single test:
@@ -157,7 +157,7 @@ pipenv run test-only
 
 It is important to start all the names of the files you want to test with `test_`.
 
-## Format Python VSCode
+## Format python code VSCode
 
 1. Install vscode extensions
 
