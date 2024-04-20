@@ -1,5 +1,5 @@
-from constants import REQUEST_VALIDATOR_CLASSES
-from helpers.request_validator import QueryRequestValidator, RequestValidator
+from api.constants import REQUEST_VALIDATOR_CLASSES
+from api.helpers.request_validator import QueryRequestValidator, RequestValidator
 
 
 def validate_request(Schema, validator_type):

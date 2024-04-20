@@ -10,6 +10,7 @@ class RequestValidatorTypes:
 
 
 class RequestValidator(ABC):
+
     def __init__(self, schema: Schema):
         self._schema = schema
         self._errors = None
@@ -24,6 +25,7 @@ class RequestValidator(ABC):
 
 
 class BodyRequestValidator(RequestValidator):
+
     def validate(self):
         self._errors = self._schema.validate(request.json)
         return self._errors
@@ -33,6 +35,7 @@ class BodyRequestValidator(RequestValidator):
 
 
 class QueryRequestValidator(RequestValidator):
+
     def validate(self):
         self._errors = self._schema.validate(request.args)
         return self._errors

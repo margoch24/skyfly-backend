@@ -1,7 +1,7 @@
 from flask import request
 
 
-class PostLoginBody:
+class PostRegisterBody:
 
     @property
     def email(self):
@@ -11,7 +11,12 @@ class PostLoginBody:
     def password(self):
         return self.__password
 
+    @property
+    def name(self):
+        return self.__name
+
     def __init__(self):
         data = request.get_json()
         self.__password = data.get("password")
         self.__email = data.get("email")
+        self.__name = data.get("name")
