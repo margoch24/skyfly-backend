@@ -154,7 +154,7 @@ class TestLogin(TestInitializer):
         self.assertEqual(response.status, "400 BAD REQUEST")
 
         message = parsed_response.data.get("message")
-        self.assertEqual(message, "app_token is not specified in headers")
+        self.assertEqual(message, "app-token is not specified in headers")
 
     def test_passing_empty_headers(self):
         response = app.post("/logout", headers={})
@@ -164,4 +164,4 @@ class TestLogin(TestInitializer):
         self.assertEqual(response.status, "400 BAD REQUEST")
 
         message = parsed_response.data.get("message")
-        self.assertEqual(message, "app_token is not specified in headers")
+        self.assertEqual(message, "app-token is not specified in headers")

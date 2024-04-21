@@ -120,6 +120,11 @@ def refresh_access():
 
         user_id = decoded_token["sub"]
 
+        user = User.find_one({"id": user_id, "is_deleted": False})
+        if not user:
+            response = {"error": 1, "data": {"message": "Insufficient permissions"}}
+            return response, 403
+
         new_access_token = create_access_token(
             identity=user_id, expires_delta=JWTConfig.JWT_ACCESS_TOKEN_EXPIRATION
         )

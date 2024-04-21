@@ -39,8 +39,8 @@ class TestGetUser(TestInitializer):
         self.assertFalse(user.get("is_deleted"))
         self.assertIsNotNone(user.get("id"))
 
-        self.assertIsInstance(user.get("created_at"), str)
-        self.assertIsInstance(user.get("updated_at"), str)
+        self.assertIsInstance(user.get("created_at"), int)
+        self.assertIsInstance(user.get("updated_at"), int)
 
         logout(headers)
 
@@ -68,7 +68,7 @@ class TestGetUser(TestInitializer):
         self.assertEqual(response.status, "400 BAD REQUEST")
 
         message = parsed_response.data.get("message")
-        self.assertEqual(message, "app_token is not specified in headers")
+        self.assertEqual(message, "app-token is not specified in headers")
 
     def test_passing_empty_auth(self):
         headers = get_initial_headers()
@@ -95,6 +95,8 @@ class TestGetUser(TestInitializer):
 
         message = parsed_response.data.get("message")
         self.assertEqual(message, "Token has expired")
+
+        JWTConfig.JWT_ACCESS_TOKEN_EXPIRATION = timedelta(hours=6)
 
     def test_passing_invalid_auth(self):
         headers = get_headers()

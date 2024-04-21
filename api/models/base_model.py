@@ -1,6 +1,5 @@
-from datetime import datetime, timezone
-
 from api.database import Database
+from api.helpers import current_milli_time
 
 db = Database().get_db()
 
@@ -8,11 +7,9 @@ db = Database().get_db()
 class BaseModel(db.Model):
     __abstract__ = True
 
-    created_at = db.Column(db.String(120), default=str(datetime.now()))
+    created_at = db.Column(db.BigInteger, default=current_milli_time)
     updated_at = db.Column(
-        db.String(120),
-        default=str(datetime.now()),
-        onupdate=str(datetime.now()),
+        db.BigInteger, default=current_milli_time, onupdate=current_milli_time
     )
 
     @classmethod
@@ -80,10 +77,13 @@ class BaseModel(db.Model):
         return True
 
     @classmethod
-    def find(cls, condition=None, limit=None):
+    def find(cls, condition=None, limit=None, order_by: list = None):
         query = db.session.query(cls)
         if condition:
             query = query.filter_by(**condition)
+
+        if order_by:
+            query = query.order_by(*order_by)
 
         if limit is not None:
             query = query.limit(limit)
