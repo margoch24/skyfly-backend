@@ -6,7 +6,7 @@ from colorama import Fore
 
 from api.bcrypt_flask import FlaskBcrypt
 from api.main import db, flask_app
-from api.models import Admin, TokenBlocklist, User
+from api.models import Admin, Review, TokenBlocklist, User
 from config import DefaultConfig, JWTConfig
 from tests.only_meta import OnlyMeta
 
@@ -161,4 +161,4 @@ def get_second_headers():
     return headers
 
 
-__all__ = [timedelta, JWTConfig, TokenBlocklist]
+__all__ = [timedelta, JWTConfig, TokenBlocklist, Review]

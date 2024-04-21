@@ -53,5 +53,5 @@ class FlaskApp:
             if not app_token or app_token != DefaultConfig.APP_TOKEN:
                 return {
                     "error": 1,
-                    "data": {"message": "app_token is not specified in headers"},
+                    "data": {"message": "app-token is not specified in headers"},
                 }, 400

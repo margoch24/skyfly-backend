@@ -31,8 +31,8 @@ class TestRegister(TestInitializer):
         self.assertFalse(user.get("is_deleted"))
         self.assertIsNotNone(user.get("id"))
 
-        self.assertIsInstance(user.get("created_at"), str)
-        self.assertIsInstance(user.get("updated_at"), str)
+        self.assertIsInstance(user.get("created_at"), int)
+        self.assertIsInstance(user.get("updated_at"), int)
 
     def test_account_exists(self):
         register_params = {
@@ -113,4 +113,4 @@ class TestRegister(TestInitializer):
         self.assertEqual(response.status, "400 BAD REQUEST")
 
         message = parsed_response.data.get("message")
-        self.assertEqual(message, "app_token is not specified in headers")
+        self.assertEqual(message, "app-token is not specified in headers")
