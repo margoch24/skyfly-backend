@@ -10,6 +10,7 @@ class User(BaseModel):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.Text, nullable=False)
     name = db.Column(db.String(120))
+    phone_number = db.Column(db.String(120))
     photo = db.Column(db.String(225))
     refresh_token = db.Column(db.Text)
     is_deleted = db.Column(db.Boolean, default=False)

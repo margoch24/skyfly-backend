@@ -18,8 +18,8 @@ class AuthService:
     def post_login(email: str, password: str, isAdmin):
         return login(email, password, isAdmin)
 
-    def post_register(email: str, password: str, name: str):
-        return register(email, password, name)
+    def post_register(email: str, password: str, name: str, phone_number: str):
+        return register(email, password, name, phone_number)
 
     def post_refresh_access():
         return refresh_access()
@@ -86,7 +86,7 @@ def login(email: str, password: str, isAdmin):
     return response
 
 
-def register(email: str, password: str, name: str):
+def register(email: str, password: str, name: str, phone_number: str):
     try:
         user_exists = User.find_one({"email": email, "is_deleted": False})
         if user_exists:
@@ -94,7 +94,9 @@ def register(email: str, password: str, name: str):
             return response, 409
 
         hashed_password = bcrypt.hash_password(password)
-        user = User.create(email=email, password=hashed_password, name=name)
+        user = User.create(
+            email=email, password=hashed_password, name=name, phone_number=phone_number
+        )
     except Exception as e:
         print(f"ERROR (register): {e}")
 

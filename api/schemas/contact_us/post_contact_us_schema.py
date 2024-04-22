@@ -1,8 +1,8 @@
 from marshmallow import Schema, fields, validate
 
 
-class PostRegisterSchema(Schema):
+class PostContactUsSchema(Schema):
+    message = fields.Str(required=True)
     email = fields.Email(required=True)
-    password = fields.Str(required=True, validate=validate.Length(8))
     name = fields.Str(required=True)
     phone_number = fields.Str(required=True)

@@ -25,7 +25,9 @@ class RegisterResource(Resource):
     @validate_request(PostRegisterSchema, RequestValidatorTypes.Body)
     def post(self):
         body = PostRegisterBody()
-        response = AuthService.post_register(body.email, body.password, body.name)
+        response = AuthService.post_register(
+            body.email, body.password, body.name, body.phone_number
+        )
         return response
 
 
