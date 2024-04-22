@@ -9,6 +9,7 @@ class TestRegister(TestInitializer):
             "email": "test@gmail.com",
             "password": "test1234",
             "name": "Test User",
+            "phone_number": "+3706458790",
         }
 
         headers = get_initial_headers()
@@ -22,6 +23,7 @@ class TestRegister(TestInitializer):
 
         self.assertEqual(user.get("name"), register_params["name"])
         self.assertEqual(user.get("email"), register_params["email"])
+        self.assertEqual(user.get("phone_number"), register_params["phone_number"])
 
         self.assertTrue("photo" in user)
 
@@ -39,6 +41,7 @@ class TestRegister(TestInitializer):
             "email": "test@gmail.com",
             "password": "test1234",
             "name": "Test User",
+            "phone_number": "+3706458790",
         }
 
         headers = get_initial_headers()
@@ -58,6 +61,7 @@ class TestRegister(TestInitializer):
             "email": "empty string",
             "password": True,
             "name": 45,
+            "phone_number": ["array"],
         }
 
         headers = get_initial_headers()
@@ -104,6 +108,7 @@ class TestRegister(TestInitializer):
             "email": "test@gmail.com",
             "password": "test1234",
             "name": "Test User",
+            "phone_number": "+3706458790",
         }
 
         response = app.post("/register", json=register_params, headers={})
