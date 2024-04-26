@@ -83,6 +83,8 @@ class TestPostReview(TestInitializer):
         self.assertEqual(messageError, "Not a valid string.")
         self.assertEqual(ratingError, "Not a valid integer.")
 
+        logout(headers)
+
     def test_passing_empty_params(self):
         headers = get_headers()
         response = app.post("/review", json={}, headers=headers)
@@ -99,13 +101,10 @@ class TestPostReview(TestInitializer):
         self.assertEqual(messageError, missing_data_error)
         self.assertEqual(ratingError, missing_data_error)
 
-    def test_passing_empty_headers(self):
-        review_params = {
-            "message": "The flight was convenient. I liked it",
-            "rating": 4,
-        }
+        logout(headers)
 
-        response = app.post("/review", json=review_params, headers={})
+    def test_passing_empty_headers(self):
+        response = app.post("/review", json={}, headers={})
         parsed_response = ParsedResponse(response)
 
         self.assertEqual(parsed_response.error, 1)
@@ -151,6 +150,7 @@ class TestPostReview(TestInitializer):
         self.assertEqual(message, "Token has expired")
 
         JWTConfig.JWT_ACCESS_TOKEN_EXPIRATION = timedelta(hours=6)
+        logout(headers)
 
     def test_passing_invalid_auth(self):
         headers = get_headers()
@@ -169,3 +169,5 @@ class TestPostReview(TestInitializer):
 
         message = parsed_response.data.get("message")
         self.assertEqual(message, "Signature verification failed")
+
+        logout(headers)

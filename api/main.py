@@ -16,17 +16,26 @@ bcrypt.initiate(flask_app.app)
 jwt = FlaskJWT()
 jwt.initiate(flask_app.app)
 
+from api.helpers.seats import create_default_seats
 from api.routes.auth_routes import auth_blueprint
 from api.routes.contact_us_routes import contact_us_blueprint
+from api.routes.flights_routes import flights_blueprint
 from api.routes.reviews_routes import reviews_blueprint
 from api.routes.user_routes import user_blueprint
 
 flask_app.register_all_blueprints(
-    [auth_blueprint, user_blueprint, reviews_blueprint, contact_us_blueprint]
+    [
+        auth_blueprint,
+        user_blueprint,
+        reviews_blueprint,
+        contact_us_blueprint,
+        flights_blueprint,
+    ]
 )
 
 with flask_app.app_context:
     db.create_all()
+    create_default_seats()
 
 
 if __name__ == "__main__":

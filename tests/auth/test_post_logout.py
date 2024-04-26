@@ -76,3 +76,13 @@ class TestLogout(TestInitializer):
 
         message = parsed_response.data.get("message")
         self.assertEqual(message, "Signature verification failed")
+
+    def test_passing_empty_headers(self):
+        response = app.post("/logout", json={}, headers={})
+        parsed_response = ParsedResponse(response)
+
+        self.assertEqual(parsed_response.error, 1)
+        self.assertEqual(response.status, "400 BAD REQUEST")
+
+        message = parsed_response.data.get("message")
+        self.assertEqual(message, "app-token is not specified in headers")

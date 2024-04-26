@@ -1,4 +1,4 @@
-from api.helpers import get_uuid
+from api.helpers.models import get_uuid
 from api.models.base_model import BaseModel, db
 
 

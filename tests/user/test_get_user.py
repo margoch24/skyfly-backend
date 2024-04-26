@@ -97,6 +97,7 @@ class TestGetUser(TestInitializer):
         self.assertEqual(message, "Token has expired")
 
         JWTConfig.JWT_ACCESS_TOKEN_EXPIRATION = timedelta(hours=6)
+        logout(headers)
 
     def test_passing_invalid_auth(self):
         headers = get_headers()
@@ -110,3 +111,4 @@ class TestGetUser(TestInitializer):
 
         message = parsed_response.data.get("message")
         self.assertEqual(message, "Signature verification failed")
+        logout(headers)
