@@ -13,7 +13,6 @@ marshmallow = "*"
 pymysql = "*"
 colorama = "*"
 flask-jwt-extended = "*"
-coverage = "*"
 
 [scripts]
 start = "python3 api/main.py"
