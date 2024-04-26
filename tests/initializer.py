@@ -5,13 +5,17 @@ from datetime import timedelta
 from colorama import Fore
 
 from api.bcrypt_flask import FlaskBcrypt
+from api.constants import CabinClass, Environment, Scheduled
+from api.helpers import current_milli_time
 from api.main import db, flask_app
-from api.models import Admin, Review, TokenBlocklist, User
+from api.models import Admin, Flight, Review, Seat, Ticket, TokenBlocklist, User
 from config import DefaultConfig, JWTConfig
 from tests.only_meta import OnlyMeta
 
 app = flask_app.app.test_client()
 bcrypt = FlaskBcrypt()
+
+from api.helpers.seats import create_default_seats
 
 
 class TestInitializer(unittest.TestCase, metaclass=OnlyMeta):
@@ -19,7 +23,7 @@ class TestInitializer(unittest.TestCase, metaclass=OnlyMeta):
 
     @classmethod
     def setUpClass(cls):
-        if DefaultConfig.ENV != "test":
+        if DefaultConfig.ENV != Environment.TEST:
             return cls.skipTest(cls, "Please set ENV to test (env ENV=test)")
 
         cls.__display_title()
@@ -37,6 +41,7 @@ class TestInitializer(unittest.TestCase, metaclass=OnlyMeta):
     def setUp(self):
         db.drop_all()
         db.create_all()
+        create_default_seats()
 
 
 class UsersConfig:
@@ -104,7 +109,7 @@ def create_user(isAdmin=None, **kwargs):
 def login(user, isAdmin=None):
     login_params = {"email": user.email, "password": user.initial_password}
 
-    headers = get_initial_headers(isAdmin)
+    headers = get_initial_headers(isAdmin=isAdmin)
     response = app.post("/login", json=login_params, headers=headers)
 
     parsed_response = ParsedResponse(response)
@@ -124,7 +129,7 @@ def logout(headers, access_token=None):
 
 def get_access_token(created_user=None, isAdmin=None, **kwargs):
     user = created_user if created_user else create_user(isAdmin, **kwargs)
-    access_token = login(user, isAdmin)
+    access_token = login(user=user, isAdmin=isAdmin)
 
     return {"user_id": user.id, "access_token": access_token}
 
@@ -133,14 +138,14 @@ def get_headers(created_access_token=None, isAdmin=None, **kwargs):
     res = (
         created_access_token
         if created_access_token
-        else get_access_token(isAdmin, **kwargs)
+        else get_access_token(isAdmin=isAdmin, **kwargs)
     )
 
     access_token = res["access_token"]
     user_id = res["user_id"]
 
     headers = {"Authorization": f"Bearer {access_token}", "user_id": user_id}
-    initial_headers = get_initial_headers(isAdmin)
+    initial_headers = get_initial_headers(isAdmin=isAdmin)
 
     headers.update(initial_headers)
 
@@ -156,9 +161,53 @@ def get_second_headers():
     )
     new_user.initial_password = password
 
-    access_token = login(new_user)
-    headers = get_headers(access_token)
+    access_token = login(user=new_user)
+    headers = get_headers(created_access_token=access_token)
     return headers
 
 
-__all__ = [timedelta, JWTConfig, TokenBlocklist, Review]
+def create_flights_with_tickets(user_id, additional_flight_data={}, tickets=1):
+    flight_data = {
+        "airline": "United",
+        "cabin_class": CabinClass.FIRST,
+        "departure": current_milli_time(),
+        "arrival": current_milli_time() + 1000,
+        "latitude": 34.0573868,
+        "longitude": -118.3535625,
+        "score": 8.5,
+        "scheduled": Scheduled.DAILY,
+        "price": 150,
+        "currency": "€",
+        **additional_flight_data,
+    }
+
+    flight = Flight.create(**flight_data)
+    seats = Seat.find({"cabin_class": flight.cabin_class})
+
+    for index in range(tickets):
+        seat = seats[index]
+
+        ticket_data = {
+            "user_id": user_id,
+            "flight_id": flight.id,
+            "seat_id": seat.id,
+            "price": 150,
+            "currency": "€",
+        }
+
+        Ticket.create(**ticket_data)
+
+    return flight
+
+
+__all__ = [
+    timedelta,
+    JWTConfig,
+    TokenBlocklist,
+    Review,
+    Flight,
+    CabinClass,
+    Scheduled,
+    Ticket,
+    Seat,
+]

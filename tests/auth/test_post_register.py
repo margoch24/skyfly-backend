@@ -104,14 +104,7 @@ class TestRegister(TestInitializer):
         self.assertEqual(response.status, "415 UNSUPPORTED MEDIA TYPE")
 
     def test_passing_empty_headers(self):
-        register_params = {
-            "email": "test@gmail.com",
-            "password": "test1234",
-            "name": "Test User",
-            "phone_number": "+3706458790",
-        }
-
-        response = app.post("/register", json=register_params, headers={})
+        response = app.post("/register", json={}, headers={})
         parsed_response = ParsedResponse(response)
 
         self.assertEqual(parsed_response.error, 1)

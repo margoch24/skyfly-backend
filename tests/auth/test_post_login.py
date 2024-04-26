@@ -142,22 +142,7 @@ class TestLogin(TestInitializer):
         self.assertEqual(response.status, "415 UNSUPPORTED MEDIA TYPE")
 
     def test_passing_empty_headers(self):
-        login_params = {
-            "email": "test@gmail.com",
-            "password": "test1234",
-        }
-
-        response = app.post("/login", json=login_params, headers={})
-        parsed_response = ParsedResponse(response)
-
-        self.assertEqual(parsed_response.error, 1)
-        self.assertEqual(response.status, "400 BAD REQUEST")
-
-        message = parsed_response.data.get("message")
-        self.assertEqual(message, "app-token is not specified in headers")
-
-    def test_passing_empty_headers(self):
-        response = app.post("/logout", headers={})
+        response = app.post("/login", json={}, headers={})
         parsed_response = ParsedResponse(response)
 
         self.assertEqual(parsed_response.error, 1)

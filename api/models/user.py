@@ -1,4 +1,4 @@
-from api.helpers import get_uuid
+from api.helpers.models import get_uuid
 from api.models.base_model import BaseModel, db
 
 
@@ -14,6 +14,8 @@ class User(BaseModel):
     photo = db.Column(db.String(225))
     refresh_token = db.Column(db.Text)
     is_deleted = db.Column(db.Boolean, default=False)
+
+    tickets = db.relationship("Ticket", back_populates="user")
 
     def __repr__(self):
         return f"<User {self.id}>"

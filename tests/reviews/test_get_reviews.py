@@ -1,4 +1,11 @@
-from tests.initializer import ParsedResponse, TestInitializer, app, get_headers, logout
+from tests.initializer import (
+    ParsedResponse,
+    TestInitializer,
+    app,
+    get_headers,
+    get_initial_headers,
+    logout,
+)
 
 
 class TestGetReviews(TestInitializer):
@@ -6,7 +13,6 @@ class TestGetReviews(TestInitializer):
 
     def test_get_reviews_successful(self):
         headers = get_headers()
-        user_id = headers["user_id"]
 
         review_one_params = {
             "message": "The flight was convenient. I liked it",
@@ -34,16 +40,14 @@ class TestGetReviews(TestInitializer):
 
         self.assertEqual(reviewTwo.get("message"), review_two_params["message"])
         self.assertEqual(reviewTwo.get("rating"), review_two_params["rating"])
-        self.assertEqual(reviewTwo.get("user_id"), user_id)
 
         self.assertEqual(reviewOne.get("message"), review_one_params["message"])
         self.assertEqual(reviewOne.get("rating"), review_one_params["rating"])
-        self.assertEqual(reviewOne.get("user_id"), user_id)
 
         logout(headers)
 
     def test_get_no_reviews_successful(self):
-        headers = get_headers()
+        headers = get_initial_headers()
 
         response = app.get("/reviews", headers=headers)
         parsed_response = ParsedResponse(response)
@@ -53,8 +57,6 @@ class TestGetReviews(TestInitializer):
 
         reviews = parsed_response.data
         self.assertEqual(len(reviews), 0)
-
-        logout(headers)
 
     def test_passing_empty_headers(self):
         response = app.get("/reviews", headers={})

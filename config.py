@@ -3,6 +3,8 @@ from datetime import timedelta
 
 from dotenv import load_dotenv
 
+from api.constants import Environment
+
 load_dotenv()
 
 
@@ -36,7 +38,7 @@ class FlaskAppConfig:
     )
     SQLALCHEMY_DATABASE_URI = (
         DefaultConfig.TEST_DATABASE_URI
-        if DefaultConfig.ENV == "test"
+        if DefaultConfig.ENV == Environment.TEST
         else DefaultConfig.DATABASE_URI
     )
 

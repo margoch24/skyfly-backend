@@ -1,16 +1,6 @@
 import time
 
-from tests.initializer import (
-    JWTConfig,
-    ParsedResponse,
-    TestInitializer,
-    User,
-    app,
-    get_headers,
-    get_initial_headers,
-    logout,
-    timedelta,
-)
+from tests.initializer import ParsedResponse, TestInitializer, app, get_initial_headers
 
 
 class TestPostContactUs(TestInitializer):
@@ -92,14 +82,7 @@ class TestPostContactUs(TestInitializer):
         self.assertEqual(phoneNumberError, missing_data_error)
 
     def test_passing_empty_headers(self):
-        contact_us_params = {
-            "name": "Test User",
-            "email": "test@gmail.com",
-            "phone_number": "+37044444444",
-            "message": "Contact us message",
-        }
-
-        response = app.post("/contact_us", json=contact_us_params, headers={})
+        response = app.post("/contact_us", json={}, headers={})
         parsed_response = ParsedResponse(response)
 
         self.assertEqual(parsed_response.error, 1)

@@ -1,3 +1,4 @@
+from api.constants import DEFAULT_LIMIT
 from api.database import Database
 from api.helpers import current_milli_time
 
@@ -77,24 +78,50 @@ class BaseModel(db.Model):
         return True
 
     @classmethod
-    def find(cls, condition=None, limit=None, order_by: list = None):
+    def find(
+        cls,
+        condition=None,
+        limit=None,
+        order_by: list = None,
+        join: list[dict] = None,
+        comparative_condition: list = None,
+        page: int = None,
+    ):
         query = db.session.query(cls)
+
+        if join:
+            for join_table in join:
+                query = query.join(join_table["table"], join_table["condition"])
+
         if condition:
             query = query.filter_by(**condition)
+
+        if comparative_condition:
+            query = query.filter(*comparative_condition)
 
         if order_by:
             query = query.order_by(*order_by)
 
-        if limit is not None:
+        if page:
+            query = query.offset(page * (limit or DEFAULT_LIMIT))
+
+        if limit:
             query = query.limit(limit)
 
         return query.all()
 
     @classmethod
-    def find_one(cls, condition=None):
+    def find_one(
+        cls,
+        condition=None,
+        comparative_condition=None,
+    ):
         query = db.session.query(cls)
         if condition:
-            return query.filter_by(**condition).first()
+            query = query.filter_by(**condition)
+
+        if comparative_condition:
+            query = query.filter(*comparative_condition)
 
         return query.first()
 
