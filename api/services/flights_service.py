@@ -90,7 +90,7 @@ def get_flights(
                 *comparative_condition,
                 Flight.arrival >= current_milli_time(),
             ],
-            condition=condition,
+            condition={**condition, "is_deleted": False},
             limit=limit,
         )
 

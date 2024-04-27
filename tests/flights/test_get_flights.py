@@ -1,5 +1,6 @@
 from tests.initializer import (
     CabinClass,
+    Flight,
     ParsedResponse,
     Seat,
     TestInitializer,
@@ -398,6 +399,49 @@ class TestGetFlights(TestInitializer):
 
         flights = parsed_response.data
         self.assertEqual(len(flights), 0)
+
+    def test_cannot_get_expired_flights(self):
+        headers = get_headers()
+        user_id = headers.get("user_id")
+
+        create_flights_with_tickets(
+            user_id=user_id,
+            tickets=0,
+            additional_flight_data={"arrival": current_milli_time() - 1000},
+        )
+
+        response = app.get("/flights", headers=headers)
+        parsed_response = ParsedResponse(response)
+
+        self.assertEqual(parsed_response.error, 0)
+        self.assertEqual(response.status, "200 OK")
+
+        flights = parsed_response.data
+        self.assertEqual(len(flights), 0)
+
+        logout(headers)
+
+    def test_cannot_get_deleted_flights(self):
+        headers = get_headers()
+        user_id = headers.get("user_id")
+
+        created_fligth = create_flights_with_tickets(
+            user_id=user_id,
+            tickets=0,
+        )
+
+        Flight.update_one(created_fligth.id, is_deleted=True)
+
+        response = app.get("/flights", headers=headers)
+        parsed_response = ParsedResponse(response)
+
+        self.assertEqual(parsed_response.error, 0)
+        self.assertEqual(response.status, "200 OK")
+
+        flights = parsed_response.data
+        self.assertEqual(len(flights), 0)
+
+        logout(headers)
 
     def test_passing_wrong_params(self):
         headers = get_initial_headers()

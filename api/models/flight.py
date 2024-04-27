@@ -24,7 +24,7 @@ class Flight(BaseModel):
 
     is_deleted = db.Column(db.Boolean, default=False)
 
-    tickets = db.relationship("Ticket", back_populates="flight")
+    ticket = db.relationship("Ticket", back_populates="flight")
 
     def __repr__(self):
         return f"<Flight {self.id}>"

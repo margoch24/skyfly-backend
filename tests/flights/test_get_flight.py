@@ -1,4 +1,5 @@
 from tests.initializer import (
+    Flight,
     ParsedResponse,
     Seat,
     TestInitializer,
@@ -98,6 +99,26 @@ class TestGetFlight(TestInitializer):
             tickets=0,
             additional_flight_data={"arrival": current_milli_time() - 1000},
         )
+
+        response = app.get(f"/flight?flight_id={created_fligth.id}", headers=headers)
+        parsed_response = ParsedResponse(response)
+        self.assertEqual(parsed_response.error, 0)
+        self.assertEqual(response.status, "200 OK")
+
+        self.assertIsNone(parsed_response.data)
+
+        logout(headers)
+
+    def test_cannot_get_deleted_flight(self):
+        headers = get_headers()
+        user_id = headers.get("user_id")
+
+        created_fligth = create_flights_with_tickets(
+            user_id=user_id,
+            tickets=0,
+        )
+
+        Flight.update_one(created_fligth.id, is_deleted=True)
 
         response = app.get(f"/flight?flight_id={created_fligth.id}", headers=headers)
         parsed_response = ParsedResponse(response)

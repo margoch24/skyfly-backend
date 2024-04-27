@@ -13,7 +13,7 @@ class Seat(BaseModel):
 
     is_deleted = db.Column(db.Boolean, default=False)
 
-    tickets = db.relationship("Ticket", back_populates="seat")
+    ticket = db.relationship("Ticket", back_populates="seat")
 
     def __repr__(self):
         return f"<Seat {self.id}>"

@@ -5,8 +5,15 @@ from datetime import timedelta
 from colorama import Fore
 
 from api.bcrypt_flask import FlaskBcrypt
-from api.constants import CabinClass, Environment, Scheduled
-from api.helpers import current_milli_time
+from api.constants import (
+    TEST_QRCODE,
+    TICKET_CHILD_DISCOUNT,
+    CabinClass,
+    Environment,
+    Scheduled,
+    TicketType,
+)
+from api.helpers import current_milli_time, isostring_to_milliseconds
 from api.main import db, flask_app
 from api.models import Admin, Flight, Review, Seat, Ticket, TokenBlocklist, User
 from config import DefaultConfig, JWTConfig
@@ -15,7 +22,7 @@ from tests.only_meta import OnlyMeta
 app = flask_app.app.test_client()
 bcrypt = FlaskBcrypt()
 
-from api.helpers.seats import create_default_seats
+from api.helpers.cronjobs import create_default_data
 
 
 class TestInitializer(unittest.TestCase, metaclass=OnlyMeta):
@@ -41,7 +48,7 @@ class TestInitializer(unittest.TestCase, metaclass=OnlyMeta):
     def setUp(self):
         db.drop_all()
         db.create_all()
-        create_default_seats()
+        create_default_data()
 
 
 class UsersConfig:
@@ -193,6 +200,10 @@ def create_flights_with_tickets(user_id, additional_flight_data={}, tickets=1):
             "seat_id": seat.id,
             "price": 150,
             "currency": "€",
+            "name": "User",
+            "surname": "Test",
+            "date_of_birth": current_milli_time(),
+            "qrcode": TEST_QRCODE,
         }
 
         Ticket.create(**ticket_data)
@@ -210,4 +221,8 @@ __all__ = [
     Scheduled,
     Ticket,
     Seat,
+    TicketType,
+    TEST_QRCODE,
+    TICKET_CHILD_DISCOUNT,
+    isostring_to_milliseconds,
 ]

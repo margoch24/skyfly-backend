@@ -7,11 +7,14 @@ from api.helpers.request_validator import (
 )
 
 DEFAULT_LIMIT = 50
+TICKET_CHILD_DISCOUNT = 0.5
 
 REQUEST_VALIDATOR_CLASSES = {
     RequestValidatorTypes.Body: BodyRequestValidator,
     RequestValidatorTypes.Query: QueryRequestValidator,
 }
+
+TEST_QRCODE = "test_qrcode"
 
 
 class CabinClass:
@@ -32,11 +35,23 @@ class SeatType:
     WINDOW = "window"
 
 
+class TicketType:
+    ADULT = "adult"
+    CHILD = "child"
+
+
 class Environment:
     TEST = "test"
     DEVELOPMENT = "development"
     PRODUCTION = "production"
 
+
+SETTINGS_DATA = [
+    {
+        "key": "ticket_child_discount",
+        "value": str(TICKET_CHILD_DISCOUNT),
+    }
+]
 
 SEATS_DATA = [
     {

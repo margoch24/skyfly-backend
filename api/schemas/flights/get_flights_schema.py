@@ -1,11 +1,6 @@
-from marshmallow import Schema, fields, validate
+from marshmallow import Schema, fields
 
-from api.constants import CabinClass
-from api.helpers.validation import (
-    cabin_class_validation,
-    class_props_to_arr,
-    price_range_validation,
-)
+from api.helpers.validation import cabin_class_validation, price_range_validation
 
 
 class GetFlightsSchema(Schema):
