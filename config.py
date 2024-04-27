@@ -19,6 +19,7 @@ class DefaultConfig:
     DATABASE_URI = get_dotenv_val("DATABASE_URI")
     TEST_DATABASE_URI = get_dotenv_val("TEST_DATABASE_URI")
     APP_TOKEN = get_dotenv_val("APP_TOKEN")
+    BACKEND_API_URL = get_dotenv_val("BACKEND_API_URL")
 
 
 class JWTConfig:

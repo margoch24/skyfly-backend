@@ -15,7 +15,7 @@ class User(BaseModel):
     refresh_token = db.Column(db.Text)
     is_deleted = db.Column(db.Boolean, default=False)
 
-    tickets = db.relationship("Ticket", back_populates="user")
+    ticket = db.relationship("Ticket", back_populates="user")
 
     def __repr__(self):
         return f"<User {self.id}>"

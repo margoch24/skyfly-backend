@@ -13,6 +13,7 @@ marshmallow = "*"
 pymysql = "*"
 colorama = "*"
 flask-jwt-extended = "*"
+qrcode = "*"
 
 [scripts]
 start = "python3 api/main.py"

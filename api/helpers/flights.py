@@ -30,3 +30,11 @@ def get_available_seats(flight: Flight):
     available_seats = [seat.serialize() for seat in seats if seat not in taken_seats]
 
     return available_seats
+
+
+def check_seat_availability(seat_id, flight):
+    available_seats = get_available_seats(flight=flight)
+    for seat in available_seats:
+        if seat.get("id") == seat_id:
+            return True
+    return False
