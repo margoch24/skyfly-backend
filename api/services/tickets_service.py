@@ -129,7 +129,7 @@ def create_ticket(
     except Exception as e:
         print(f"ERROR (create_ticket): {e}")
 
-    if not ticket or not updated_ticket:
+    if not ticket or not updated_ticket or not qrcode:
         response = {"error": 1, "data": {"message": "Internal server error"}}
         return response, 500
 
