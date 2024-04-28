@@ -16,7 +16,7 @@ bcrypt.initiate(flask_app.app)
 jwt = FlaskJWT()
 jwt.initiate(flask_app.app)
 
-from api.helpers.cronjobs import create_default_data
+from api.helpers.cronjobs import create_default_data, set_cronjobs
 from api.routes import (
     auth_blueprint,
     contact_us_blueprint,
@@ -42,6 +42,7 @@ flask_app.register_all_blueprints(
 with flask_app.app_context:
     db.create_all()
     create_default_data()
+    set_cronjobs(flask_app.app_context)
 
 
 if __name__ == "__main__":

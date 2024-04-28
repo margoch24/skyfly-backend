@@ -13,7 +13,11 @@ from api.constants import (
     Scheduled,
     TicketType,
 )
-from api.helpers import current_milli_time, isostring_to_milliseconds
+from api.helpers import (
+    current_milli_time,
+    isostring_to_milliseconds,
+    milliseconds_to_iso,
+)
 from api.main import db, flask_app
 from api.models import Admin, Flight, Review, Seat, Ticket, TokenBlocklist, User
 from config import DefaultConfig, JWTConfig
@@ -23,6 +27,7 @@ app = flask_app.app.test_client()
 bcrypt = FlaskBcrypt()
 
 from api.helpers.cronjobs import create_default_data
+from api.helpers.flights import update_scheduled_flights
 
 
 class TestInitializer(unittest.TestCase, metaclass=OnlyMeta):
@@ -177,7 +182,7 @@ def get_second_headers():
     return headers
 
 
-def create_flights_with_tickets(user_id, additional_flight_data={}, tickets=1):
+def create_flights_with_tickets(user_id=None, additional_flight_data={}, tickets=1):
     flight_data = {
         "airline": "United",
         "cabin_class": CabinClass.FIRST,
@@ -193,6 +198,9 @@ def create_flights_with_tickets(user_id, additional_flight_data={}, tickets=1):
     }
 
     flight = Flight.create(**flight_data)
+    if not user_id:
+        return flight
+
     seats = Seat.find({"cabin_class": flight.cabin_class})
 
     for index in range(tickets):
@@ -229,4 +237,6 @@ __all__ = [
     TEST_QRCODE,
     TICKET_CHILD_DISCOUNT,
     isostring_to_milliseconds,
+    update_scheduled_flights,
+    milliseconds_to_iso,
 ]
