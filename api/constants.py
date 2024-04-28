@@ -16,7 +16,7 @@ REQUEST_VALIDATOR_CLASSES = {
     RequestValidatorTypes.Files: FilesRequestValidator,
 }
 
-TEST_QRCODE = "test_qrcode"
+TEST_QRCODE = "test_qrcode.png"
 
 
 class CabinClass:
