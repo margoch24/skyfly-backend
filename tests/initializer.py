@@ -73,6 +73,7 @@ class UsersConfig:
         user = {
             "email": "user@gmail.com",
             "password": bcrypt.hash_password(self.user_password),
+            "phone_number": "+370666553322",
             "name": "User",
             "photo": None,
         }
