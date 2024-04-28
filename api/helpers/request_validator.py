@@ -7,6 +7,7 @@ from marshmallow import Schema
 class RequestValidatorTypes:
     Body = "body"
     Query = "query"
+    Files = "files"
 
 
 class RequestValidator(ABC):
@@ -42,3 +43,13 @@ class QueryRequestValidator(RequestValidator):
 
     def load(self):
         return self._schema.load(request.args)
+
+
+class FilesRequestValidator(RequestValidator):
+
+    def validate(self):
+        self._errors = self._schema.validate(request.files)
+        return self._errors
+
+    def load(self):
+        return self._schema.load(request.files)

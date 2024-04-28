@@ -48,7 +48,9 @@ def generate_qrcode(ticket_id: str):
 
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
-    uploads_dir = os.path.join(current_dir, "../../../uploads/qrcodes")
+    uploads_dir = os.path.join(
+        current_dir, f"../../{DefaultConfig.UPLOAD_FOLDER}/qrcodes/"
+    )
 
     if not os.path.exists(uploads_dir):
         os.makedirs(uploads_dir)
@@ -67,4 +69,4 @@ def generate_qrcode(ticket_id: str):
     img_path = os.path.join(uploads_dir, img_name)
     img.save(img_path)
 
-    return img_path
+    return img_name

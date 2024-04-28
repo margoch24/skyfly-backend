@@ -17,12 +17,15 @@ jwt = FlaskJWT()
 jwt.initiate(flask_app.app)
 
 from api.helpers.cronjobs import create_default_data
-from api.routes.auth_routes import auth_blueprint
-from api.routes.contact_us_routes import contact_us_blueprint
-from api.routes.flights_routes import flights_blueprint
-from api.routes.reviews_routes import reviews_blueprint
-from api.routes.tickets_routes import tickets_blueprint
-from api.routes.user_routes import user_blueprint
+from api.routes import (
+    auth_blueprint,
+    contact_us_blueprint,
+    flights_blueprint,
+    images_blueprint,
+    reviews_blueprint,
+    tickets_blueprint,
+    user_blueprint,
+)
 
 flask_app.register_all_blueprints(
     [
@@ -32,6 +35,7 @@ flask_app.register_all_blueprints(
         contact_us_blueprint,
         flights_blueprint,
         tickets_blueprint,
+        images_blueprint,
     ]
 )
 
