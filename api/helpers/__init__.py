@@ -1,6 +1,6 @@
 import random
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 def current_milli_time():
@@ -17,3 +17,14 @@ def isostring_to_milliseconds(iso_string: str):
     date = datetime.fromisoformat(iso_string)
     milliseconds = int(date.timestamp() * 1000)
     return milliseconds
+
+
+def days_to_milliseconds(days):
+    return timedelta(days=days).total_seconds() * 1000
+
+
+def milliseconds_to_iso(milliseconds):
+    seconds = milliseconds / 1000
+    date = datetime.fromtimestamp(seconds)
+    iso_string = date.isoformat()
+    return iso_string
