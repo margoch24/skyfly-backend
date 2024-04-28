@@ -13,7 +13,7 @@ class Ticket(BaseModel):
     type = db.Column(db.String(120), default=TicketType.ADULT)
     qrcode = db.Column(db.String(225))
 
-    price = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Float(precision=32, decimal_return_scale=None), nullable=False)
     currency = db.Column(db.String(4), nullable=False)
 
     is_deleted = db.Column(db.Boolean, default=False)
