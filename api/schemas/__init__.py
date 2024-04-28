@@ -7,6 +7,7 @@ from api.schemas.flights.post_flight_schema import PostFlightSchema
 from api.schemas.images.get_image_schema import GetImageSchema
 from api.schemas.images.upload_image_schema import UploadImageSchema
 from api.schemas.reviews.post_review_schema import PostReviewSchema
+from api.schemas.tickets.get_check_ticket_schema import GetCheckTicketSchema
 from api.schemas.tickets.get_future_tickets_schema import GetFutureTicketsSchema
 from api.schemas.tickets.get_past_tickets_schema import GetPastTicketsSchema
 from api.schemas.tickets.post_ticket_schema import PostTicketSchema
@@ -26,4 +27,5 @@ __all__ = [
     GetImageSchema,
     UploadImageSchema,
     PutUserSchema,
+    GetCheckTicketSchema,
 ]
