@@ -10,6 +10,7 @@ from api.requests.reviews.post_review_body import PostReviewBody
 from api.requests.tickets.get_future_tickets_query import GetFutureTicketsQuery
 from api.requests.tickets.get_past_tickets_query import GetPastTicketsQuery
 from api.requests.tickets.post_ticket_body import PostTicketBody
+from api.requests.user.put_user_body import PutUserBody
 
 __all__ = [
     PostLoginBody,
@@ -24,4 +25,5 @@ __all__ = [
     GetFutureTicketsQuery,
     GetImageQuery,
     UploadImageFiles,
+    PutUserBody,
 ]

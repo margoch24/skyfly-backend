@@ -10,6 +10,7 @@ from api.schemas.reviews.post_review_schema import PostReviewSchema
 from api.schemas.tickets.get_future_tickets_schema import GetFutureTicketsSchema
 from api.schemas.tickets.get_past_tickets_schema import GetPastTicketsSchema
 from api.schemas.tickets.post_ticket_schema import PostTicketSchema
+from api.schemas.user.put_user_schema import PutUserSchema
 
 __all__ = [
     PostLoginSchema,
@@ -24,4 +25,5 @@ __all__ = [
     GetFutureTicketsSchema,
     GetImageSchema,
     UploadImageSchema,
+    PutUserSchema,
 ]
