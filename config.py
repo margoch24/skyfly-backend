@@ -20,6 +20,8 @@ class DefaultConfig:
     TEST_DATABASE_URI = get_dotenv_val("TEST_DATABASE_URI")
     APP_TOKEN = get_dotenv_val("APP_TOKEN")
     BACKEND_API_URL = get_dotenv_val("BACKEND_API_URL")
+    UPLOAD_FOLDER = "uploads"
+    ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg", "gif"]
 
 
 class JWTConfig:
@@ -32,6 +34,7 @@ class JWTConfig:
 class FlaskAppConfig:
     DEBUG = get_dotenv_val("FLASK_DEBUG")
     SECRET_KEY = get_dotenv_val("SECRET_KEY")
+    UPLOAD_FOLDER = DefaultConfig.UPLOAD_FOLDER
 
     SQLALCHEMY_ECHO = get_dotenv_val("FLASK_SQLALCHEMY_ECHO")
     SQLALCHEMY_TRACK_MODIFICATIONS = get_dotenv_val(

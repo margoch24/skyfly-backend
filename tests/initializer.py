@@ -87,6 +87,10 @@ class ParsedResponse:
     def data(self):
         return self.__parsed_response.get("data")
 
+    @property
+    def message(self):
+        return self.__parsed_response.get("message")
+
     def __init__(self, response):
         self.__parsed_response = json.loads(response.data)
 

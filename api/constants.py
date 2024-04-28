@@ -2,6 +2,7 @@ from enum import Enum
 
 from api.helpers.request_validator import (
     BodyRequestValidator,
+    FilesRequestValidator,
     QueryRequestValidator,
     RequestValidatorTypes,
 )
@@ -12,6 +13,7 @@ TICKET_CHILD_DISCOUNT = 0.5
 REQUEST_VALIDATOR_CLASSES = {
     RequestValidatorTypes.Body: BodyRequestValidator,
     RequestValidatorTypes.Query: QueryRequestValidator,
+    RequestValidatorTypes.Files: FilesRequestValidator,
 }
 
 TEST_QRCODE = "test_qrcode"
