@@ -61,7 +61,7 @@ def generate_qrcode(ticket_id: str):
         box_size=50,
         border=1,
     )
-    qr.add_data(f"{DefaultConfig.BACKEND_API_URL}/check-ticket?ticket_id={ticket_id}")
+    qr.add_data(f"{DefaultConfig.FRONTEND_API_URL}/check-ticket?ticket_id={ticket_id}")
     qr.make(fit=True)
 
     img = qr.make_image(fill_color="#212940", back_color="white")

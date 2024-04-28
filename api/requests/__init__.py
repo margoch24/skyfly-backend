@@ -7,6 +7,7 @@ from api.requests.flights.post_flight_body import PostFlightBody
 from api.requests.images.get_image_query import GetImageQuery
 from api.requests.images.upload_image_files import UploadImageFiles
 from api.requests.reviews.post_review_body import PostReviewBody
+from api.requests.tickets.get_check_ticket_query import GetCheckTicketQuery
 from api.requests.tickets.get_future_tickets_query import GetFutureTicketsQuery
 from api.requests.tickets.get_past_tickets_query import GetPastTicketsQuery
 from api.requests.tickets.post_ticket_body import PostTicketBody
@@ -26,4 +27,5 @@ __all__ = [
     GetImageQuery,
     UploadImageFiles,
     PutUserBody,
+    GetCheckTicketQuery,
 ]

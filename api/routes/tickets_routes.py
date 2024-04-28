@@ -1,4 +1,5 @@
 from api.controllers.tickets_controller import (
+    CheckTicketResource,
     FutureTicketsResource,
     PastTicketsResource,
     TicketResource,
@@ -13,3 +14,4 @@ tickets_api = app.create_api(tickets_blueprint)
 app.add_resource(tickets_api, TicketResource, "/ticket")
 app.add_resource(tickets_api, FutureTicketsResource, "/future-tickets")
 app.add_resource(tickets_api, PastTicketsResource, "/past-tickets")
+app.add_resource(tickets_api, CheckTicketResource, "/check-ticket")

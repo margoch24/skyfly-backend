@@ -3,7 +3,7 @@ from flask_jwt_extended import get_jwt_identity
 from api.helpers import current_milli_time
 from api.helpers.flights import check_seat_availability
 from api.helpers.tickets import calculate_discount, generate_qrcode
-from api.models import Flight, Seat, Ticket, User
+from api.models import Admin, Flight, Seat, Ticket, User
 
 
 class TicketsService:
@@ -15,6 +15,9 @@ class TicketsService:
 
     def get_tickets(limit: int, page: int, type: str):
         return get_tickets(limit, page, type)
+
+    def check_ticket(ticket_id: str):
+        return check_ticket(ticket_id)
 
 
 def get_tickets(limit: int, page: int, type: str):
@@ -137,4 +140,56 @@ def create_ticket(
         "error": 0,
         "data": ticket.serialize(),
     }
+    return response, 200
+
+
+def check_ticket(ticket_id: str):
+    try:
+        admin_id = get_jwt_identity()
+        admin_exist = Admin.find_one({"id": admin_id, "is_deleted": False})
+
+        if not admin_exist:
+            response = {"error": 1, "data": {"message": "Insufficient permissions"}}
+            return response, 403
+
+        ticket = Ticket.find_one(
+            comparative_condition=[Ticket.id == ticket_id],
+            join=[
+                {"table": Seat, "condition": Ticket.seat_id == Seat.id},
+                {
+                    "table": Flight,
+                    "condition": Ticket.flight_id == Flight.id,
+                },
+                {
+                    "table": User,
+                    "condition": Ticket.user_id == User.id,
+                },
+            ],
+        )
+    except Exception as e:
+        print(f"ERROR (check_ticket): {e}")
+
+    message = "Ticket is valid"
+    valid = True
+
+    if ticket.is_deleted:
+        message = "Ticket is deleted"
+        valid = False
+
+    if ticket.flight.arrival < current_milli_time():
+        message = "Ticket is expired"
+        valid = False
+
+    ticket_response = {
+        **ticket.serialize(),
+        "owner_name": ticket.user.name,
+        "owner_email": ticket.user.email,
+        "initial_price": ticket.flight.price,
+        "seat": ticket.seat.serialize(),
+        "flight": ticket.flight.serialize(),
+        "message": message,
+        "valid": valid,
+    }
+
+    response = {"error": 0, "data": ticket_response}
     return response, 200

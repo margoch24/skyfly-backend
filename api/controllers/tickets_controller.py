@@ -3,8 +3,18 @@ from flask_restful import Resource
 
 from api.helpers.request_validator import RequestValidatorTypes
 from api.middlewares.validate_request import validate_request
-from api.requests import GetFutureTicketsQuery, GetPastTicketsQuery, PostTicketBody
-from api.schemas import GetFutureTicketsSchema, GetPastTicketsSchema, PostTicketSchema
+from api.requests import (
+    GetCheckTicketQuery,
+    GetFutureTicketsQuery,
+    GetPastTicketsQuery,
+    PostTicketBody,
+)
+from api.schemas import (
+    GetCheckTicketSchema,
+    GetFutureTicketsSchema,
+    GetPastTicketsSchema,
+    PostTicketSchema,
+)
 from api.services.tickets_service import TicketsService
 
 
@@ -40,4 +50,15 @@ class FutureTicketsResource(Resource):
         query = GetFutureTicketsQuery()
 
         response = TicketsService.get_tickets(query.limit, query.page, "future")
+        return response
+
+
+class CheckTicketResource(Resource):
+
+    @jwt_required()
+    @validate_request(GetCheckTicketSchema, RequestValidatorTypes.Query)
+    def get(self):
+        query = GetCheckTicketQuery()
+
+        response = TicketsService.check_ticket(query.ticket_id)
         return response

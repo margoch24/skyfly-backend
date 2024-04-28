@@ -115,8 +115,14 @@ class BaseModel(db.Model):
         cls,
         condition=None,
         comparative_condition=None,
+        join: list[dict] = None,
     ):
         query = db.session.query(cls)
+
+        if join:
+            for join_table in join:
+                query = query.join(join_table["table"], join_table["condition"])
+
         if condition:
             query = query.filter_by(**condition)
 
