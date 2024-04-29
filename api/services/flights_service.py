@@ -72,7 +72,7 @@ def get_flights(
             "price": {"type": "range"},
             "cabin_class": {"type": "in"},
         }
-        [comparative_condition, condition] = prepare_condition(
+        comparative_condition, condition = prepare_condition(
             cls=Flight,
             config=config,
             arrival=arrival,
@@ -95,7 +95,9 @@ def get_flights(
         )
 
         for flight in flights:
-            available_seats_amount = len(get_available_seats(flight))
+            available_seats, *_ = get_available_seats(flight)
+            available_seats_amount = len(available_seats)
+
             flight_with_seats = {
                 **flight.serialize(),
                 "available_seats": available_seats_amount,
@@ -133,9 +135,15 @@ def get_flight(flight_id):
         }
         return response, 200
 
+    available_seats, seats = get_available_seats(flight)
+
     response = {
         "error": 0,
-        "data": {**flight.serialize(), "available_seats": get_available_seats(flight)},
+        "data": {
+            **flight.serialize(),
+            "available_seats": available_seats,
+            "seats": seats,
+        },
     }
     return response, 200
 

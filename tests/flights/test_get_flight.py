@@ -1,7 +1,6 @@
 from tests.initializer import (
     Flight,
     ParsedResponse,
-    Seat,
     TestInitializer,
     app,
     create_flights_with_tickets,
@@ -49,7 +48,7 @@ class TestGetFlight(TestInitializer):
         self.assertIsInstance(flight.get("updated_at"), int)
 
         available_seats = flight.get("available_seats")
-        seats = Seat.find({"cabin_class": created_fligth.cabin_class})
+        seats = flight.get("seats")
 
         self.assertEqual(len(available_seats), len(seats) - tickets_to_create)
 
@@ -72,7 +71,7 @@ class TestGetFlight(TestInitializer):
         self.assertEqual(flight.get("id"), created_fligth.id)
 
         available_seats = flight.get("available_seats")
-        seats = Seat.find({"cabin_class": created_fligth.cabin_class})
+        seats = flight.get("seats")
 
         self.assertEqual(len(available_seats), len(seats))
 
