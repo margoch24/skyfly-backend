@@ -6,7 +6,7 @@ from config import DefaultConfig
 
 def get_available_seats(flight: Flight):
     try:
-        seats = Seat.find({"cabin_class": flight.cabin_class})
+        found_seats = Seat.find({"cabin_class": flight.cabin_class})
 
         tickets = Ticket.find(
             join=[
@@ -29,13 +29,16 @@ def get_available_seats(flight: Flight):
     for ticket in tickets:
         taken_seats.append(ticket.seat)
 
-    available_seats = [seat.serialize() for seat in seats if seat not in taken_seats]
+    available_seats = [
+        seat.serialize() for seat in found_seats if seat not in taken_seats
+    ]
+    seats = [seat.serialize() for seat in found_seats]
 
-    return available_seats
+    return available_seats, seats
 
 
 def check_seat_availability(seat_id, flight):
-    available_seats = get_available_seats(flight=flight)
+    available_seats, *_ = get_available_seats(flight=flight)
     for seat in available_seats:
         if seat.get("id") == seat_id:
             return True

@@ -10,7 +10,7 @@ def prepare_condition(cls, config={}, **kwargs):
     comparative_conditions = []
 
     for key, value in kwargs.items():
-        [comparative_condition, condition] = prepare_condition_property(
+        comparative_condition, condition = prepare_condition_property(
             cls=cls,
             key=key,
             value=value,
@@ -20,7 +20,7 @@ def prepare_condition(cls, config={}, **kwargs):
         conditions.update(condition)
         comparative_conditions.extend(comparative_condition)
 
-    return [comparative_conditions, conditions]
+    return comparative_conditions, conditions
 
 
 def prepare_condition_property(cls, key, value, config):
@@ -28,12 +28,12 @@ def prepare_condition_property(cls, key, value, config):
     comparative_condition = []
 
     if not value:
-        return [comparative_condition, condition]
+        return comparative_condition, condition
 
     config_value = config.get(key)
     if not config_value:
         condition[key] = value
-        return [comparative_condition, condition]
+        return comparative_condition, condition
 
     attribute = getattr(cls, key)
 
@@ -73,4 +73,4 @@ def prepare_condition_property(cls, key, value, config):
         case "==":
             comparative_condition.append(attribute == value)
 
-    return [comparative_condition, condition]
+    return comparative_condition, condition
