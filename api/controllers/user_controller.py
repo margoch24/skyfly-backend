@@ -1,3 +1,4 @@
+from flask import request
 from flask_jwt_extended import jwt_required
 from flask_restful import Resource
 
@@ -12,7 +13,8 @@ class UserResource(Resource):
 
     @jwt_required()
     def get(self):
-        response = UserService.get_user()
+        isAdmin = request.headers.get("referrer-type") == "admin"
+        response = UserService.get_user(isAdmin)
         return response
 
     @jwt_required()

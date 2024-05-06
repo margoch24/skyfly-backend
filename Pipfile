@@ -15,6 +15,7 @@ colorama = "*"
 flask-jwt-extended = "*"
 qrcode = "*"
 apscheduler = "*"
+flask-cors = "*"
 
 [scripts]
 start = "python3 api/main.py"

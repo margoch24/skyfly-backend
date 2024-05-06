@@ -39,6 +39,7 @@ flask_app.register_all_blueprints(
     ]
 )
 
+
 with flask_app.app_context:
     db.create_all()
     create_default_data()

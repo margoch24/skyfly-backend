@@ -1,4 +1,5 @@
 from flask import Blueprint, Flask, request
+from flask_cors import CORS
 from flask_restful import Api, Resource
 
 from config import DefaultConfig
@@ -20,6 +21,11 @@ class FlaskApp:
 
     def __init__(self) -> None:
         self.__app = Flask(__name__)
+        CORS(
+            self.__app,
+            resources={r"/*": {"origins": DefaultConfig.FRONTEND_API_URL}},
+            supports_credentials=True,
+        )
         self.__app_context = self.__app.app_context()
         self.cases_handling()
 
@@ -49,7 +55,13 @@ class FlaskApp:
     def cases_handling(self):
         @self.__app.before_request
         def before_request():
-            app_token = request.headers.get("app_token")
+            if request.method == "OPTIONS":
+                return
+
+            if request.method == "GET" and request.path == "/image":
+                return
+
+            app_token = request.headers.get("App-Token")
             if not app_token or app_token != DefaultConfig.APP_TOKEN:
                 return {
                     "error": 1,

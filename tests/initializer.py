@@ -103,7 +103,7 @@ class ParsedResponse:
 
 def get_initial_headers(isAdmin=None):
     headers = {
-        "app_token": DefaultConfig.APP_TOKEN,
+        "App-Token": DefaultConfig.APP_TOKEN,
     }
 
     if isAdmin:

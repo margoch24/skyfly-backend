@@ -31,13 +31,3 @@ class TestGetImage(TestInitializer):
         [filenameError] = parsed_response.data.get("filename")
 
         self.assertEqual(filenameError, missing_data_error)
-
-    def test_passing_empty_headers(self):
-        response = app.get("/image", headers={})
-        parsed_response = ParsedResponse(response)
-
-        self.assertEqual(parsed_response.error, 1)
-        self.assertEqual(response.status, "400 BAD REQUEST")
-
-        message = parsed_response.data.get("message")
-        self.assertEqual(message, "app-token is not specified in headers")
