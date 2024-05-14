@@ -8,20 +8,20 @@ So, no more waiting in lines or dealing with complicated bookings. Everything's 
 
 ## Images of SkyFly
 
-Detailed flight page
-<img src="/uploads/flight_page.png" alt="Flight page" style="width:400px;"/>
+#### Detailed flight page
+<img src="/uploads/flight_page.png" alt="Flight page" style="width:500px;"/>
 
-Search for most suitable flight
-<img src="/uploads/flights.png" alt="Flights" style="width:400px;"/>
+#### Search for most suitable flight
+<img src="/uploads/flights.png" alt="Flights" style="width:500px;"/>
 
-Home page
-<img src="/uploads/home_page.png" alt="Home page" style="width:400px;"/>
+#### Home page
+<img src="/uploads/home_page.png" alt="Home page" style="width:500px;"/>
 
-Booking tickets
-<img src="/uploads/ticket_creation.png" alt="Booking tickets" style="width:400px;"/>
+#### Booking tickets
+<img src="/uploads/ticket_creation.png" alt="Booking tickets" style="width:500px;"/>
 
-User profile, past and future tickets pages
-<img src="/uploads/user_tickets.png" alt="User tickets" style="width:400px;"/>
+#### User profile, past and future tickets pages
+<img src="/uploads/user_tickets.png" alt="User tickets" style="width:500px;"/>
 
 ## Run project locally
 
