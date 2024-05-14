@@ -17,6 +17,9 @@ class PostFlightSchema(Schema):
     )
     price = fields.Float(required=True)
     currency = fields.Str(required=True)
-    longitude = fields.Float(required=True)
-    latitude = fields.Float(required=True)
+    from_longitude = fields.Float(required=True)
+    from_latitude = fields.Float(required=True)
+
+    to_longitude = fields.Float(required=True)
+    to_latitude = fields.Float(required=True)
     score = fields.Float(required=True, validate=validate.Range(min=0, max=10))

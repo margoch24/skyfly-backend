@@ -17,8 +17,11 @@ class Flight(BaseModel):
     price = db.Column(db.Float(precision=32, decimal_return_scale=None))
     currency = db.Column(db.String(4))
 
-    longitude = db.Column(db.Float(precision=32, decimal_return_scale=None))
-    latitude = db.Column(db.Float(precision=32, decimal_return_scale=None))
+    from_longitude = db.Column(db.Float(precision=32, decimal_return_scale=None))
+    from_latitude = db.Column(db.Float(precision=32, decimal_return_scale=None))
+
+    to_longitude = db.Column(db.Float(precision=32, decimal_return_scale=None))
+    to_latitude = db.Column(db.Float(precision=32, decimal_return_scale=None))
 
     score = db.Column(db.Float)
 

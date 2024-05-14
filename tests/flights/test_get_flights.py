@@ -372,7 +372,7 @@ class TestGetFlights(TestInitializer):
         flight_one = create_flights_with_tickets(user_id=user_id)
 
         response = app.get(
-            f"/flights?latitude={flight_one.latitude}&longitude={flight_one.longitude}",
+            f"/flights?from_latitude={flight_one.from_latitude}&from_longitude={flight_one.from_longitude}",
             headers=headers,
         )
         parsed_response = ParsedResponse(response)
@@ -450,8 +450,10 @@ class TestGetFlights(TestInitializer):
                     &cabin_class=kkk
                     &arrival=True
                     &departure=[]
-                    &latitude=kkk
-                    &longitude=kkk
+                    &from_latitude=kkk
+                    &from_longitude=kkk
+                    &to_latitude=kkk
+                    &to_longitude=kkk
                     &limit=k"""
 
         response = app.get(f"/flights{query}", headers=headers)
@@ -460,8 +462,10 @@ class TestGetFlights(TestInitializer):
         self.assertEqual(parsed_response.error, 1)
         self.assertEqual(response.status, "400 BAD REQUEST")
 
-        [longitudeError] = parsed_response.data.get("longitude")
-        [latitudeError] = parsed_response.data.get("latitude")
+        [fromLongitudeError] = parsed_response.data.get("from_longitude")
+        [fromLatitudeError] = parsed_response.data.get("from_latitude")
+        [toLongitudeError] = parsed_response.data.get("to_longitude")
+        [toLatitudeError] = parsed_response.data.get("to_latitude")
         [departureError] = parsed_response.data.get("departure")
         [arrivalError] = parsed_response.data.get("arrival")
         [cabinClassError] = parsed_response.data.get("cabin_class")
@@ -469,8 +473,10 @@ class TestGetFlights(TestInitializer):
         [pageError] = parsed_response.data.get("page")
         [limitError] = parsed_response.data.get("limit")
 
-        self.assertEqual(longitudeError, "Not a valid number.")
-        self.assertEqual(latitudeError, "Not a valid number.")
+        self.assertEqual(fromLongitudeError, "Not a valid number.")
+        self.assertEqual(fromLatitudeError, "Not a valid number.")
+        self.assertEqual(toLongitudeError, "Not a valid number.")
+        self.assertEqual(toLatitudeError, "Not a valid number.")
         self.assertEqual(departureError, "Not a valid integer.")
         self.assertEqual(arrivalError, "Not a valid integer.")
         self.assertEqual(cabinClassError, "Must be one of: business, economy, first.")

@@ -20,13 +20,15 @@ class FlightResource(Resource):
             body.airline,
             body.cabin_class,
             body.departure,
-            body.latitude,
-            body.longitude,
             body.photo,
             body.score,
             body.scheduled,
             body.price,
             body.currency,
+            body.from_latitude,
+            body.from_longitude,
+            body.to_latitude,
+            body.to_longitude,
         )
         return response
 
@@ -48,10 +50,12 @@ class FlightsResource(Resource):
             query.arrival,
             query.cabin_class,
             query.departure,
-            query.latitude,
-            query.longitude,
             query.page,
             query.price,
             query.limit,
+            query.from_latitude,
+            query.from_longitude,
+            query.to_latitude,
+            query.to_longitude,
         )
         return response

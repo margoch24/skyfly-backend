@@ -3,13 +3,23 @@ from flask import request
 
 class GetFlightsQuery:
     @property
-    def longitude(self):
-        value = self.__longitude
+    def from_longitude(self):
+        value = self.__from_longitude
         return value if not value else float(value)
 
     @property
-    def latitude(self):
-        value = self.__latitude
+    def from_latitude(self):
+        value = self.__from_latitude
+        return value if not value else float(value)
+
+    @property
+    def to_longitude(self):
+        value = self.__to_longitude
+        return value if not value else float(value)
+
+    @property
+    def to_latitude(self):
+        value = self.__to_latitude
         return value if not value else float(value)
 
     @property
@@ -53,8 +63,10 @@ class GetFlightsQuery:
 
     def __init__(self):
         data = request.args
-        self.__longitude = data.get("longitude")
-        self.__latitude = data.get("latitude")
+        self.__from_longitude = data.get("from_longitude")
+        self.__from_latitude = data.get("from_latitude")
+        self.__to_longitude = data.get("to_longitude")
+        self.__to_latitude = data.get("to_latitude")
         self.__departure = data.get("departure")
         self.__arrival = data.get("arrival")
         self.__cabin_class = data.get("cabin_class")

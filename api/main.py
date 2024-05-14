@@ -23,6 +23,7 @@ from api.routes import (
     flights_blueprint,
     images_blueprint,
     reviews_blueprint,
+    settings_blueprint,
     tickets_blueprint,
     user_blueprint,
 )
@@ -36,6 +37,7 @@ flask_app.register_all_blueprints(
         flights_blueprint,
         tickets_blueprint,
         images_blueprint,
+        settings_blueprint,
     ]
 )
 

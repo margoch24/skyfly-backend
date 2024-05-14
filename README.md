@@ -1,5 +1,28 @@
 # SkyFly Backend
 
+In today's world, we rely a lot on gadgets and apps for convenience. They help us save time and do things from home. </br>
+This app works the same way. It lets you buy flight tickets without going out. </br>
+You can make an account, share your thoughts, leave reviews, and contact us at any time you want. </br>
+Admins can create flights, check passengers and do other important things. </br>
+So, no more waiting in lines or dealing with complicated bookings. Everything's easy with our app! </br>
+
+## Images of SkyFly
+
+Detailed flight page
+<img src="/uploads/flight_page.png" alt="Flight page" style="width:400px;"/>
+
+Search for most suitable flight
+<img src="/uploads/flights.png" alt="Flights" style="width:400px;"/>
+
+Home page
+<img src="/uploads/home_page.png" alt="Home page" style="width:400px;"/>
+
+Booking tickets
+<img src="/uploads/ticket_creation.png" alt="Booking tickets" style="width:400px;"/>
+
+User profile, past and future tickets pages
+<img src="/uploads/user_tickets.png" alt="User tickets" style="width:400px;"/>
+
 ## Run project locally
 
 1. Install python packages
@@ -145,7 +168,7 @@ pipenv run test
 ### Run single test
 
 1. add `_only` to the end of the method name of the test you want to test.<br>
-   *def test_successful(self) ---> def test_successful_only(self)*
+   _def test_successful(self) ---> def test_successful_only(self)_
 
 2. run single test:
 
@@ -181,7 +204,8 @@ Add:
 
 3. Upgrade vscode if changes have no effect:
 
-```bash
+````bash
 sudo apt update
 sudo apt install code
-```
+```In today's world, we rely a lot on gadgets and apps for convenience. They help us save time and do things from home. This app works the same way. It lets you buy flight tickets without going out. You can make an account, share your thoughts, leave reviews, and contact us at any time you want. Admins can create flights, check passengers and do other important things. So, no more waiting in lines or dealing with complicated bookings. Everything's easy with our app!
+````

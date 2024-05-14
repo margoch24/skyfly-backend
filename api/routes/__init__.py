@@ -3,6 +3,7 @@ from api.routes.contact_us_routes import contact_us_blueprint
 from api.routes.flights_routes import flights_blueprint
 from api.routes.images_routes import images_blueprint
 from api.routes.reviews_routes import reviews_blueprint
+from api.routes.settings_routes import settings_blueprint
 from api.routes.tickets_routes import tickets_blueprint
 from api.routes.user_routes import user_blueprint
 
@@ -14,4 +15,5 @@ __all__ = [
     tickets_blueprint,
     images_blueprint,
     user_blueprint,
+    settings_blueprint,
 ]

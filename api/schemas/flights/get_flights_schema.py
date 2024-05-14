@@ -4,8 +4,10 @@ from api.helpers.validation import cabin_class_validation, price_range_validatio
 
 
 class GetFlightsSchema(Schema):
-    longitude = fields.Float()
-    latitude = fields.Float()
+    from_longitude = fields.Float()
+    from_latitude = fields.Float()
+    to_longitude = fields.Float()
+    to_latitude = fields.Float()
     departure = fields.Integer()
     arrival = fields.Integer()
     cabin_class = fields.String(validate=cabin_class_validation)

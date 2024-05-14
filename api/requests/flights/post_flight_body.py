@@ -36,12 +36,20 @@ class PostFlightBody:
         return self.__currency
 
     @property
-    def longitude(self):
-        return self.__longitude
+    def from_longitude(self):
+        return self.__from_longitude
 
     @property
-    def latitude(self):
-        return self.__latitude
+    def from_latitude(self):
+        return self.__from_latitude
+
+    @property
+    def to_longitude(self):
+        return self.__to_longitude
+
+    @property
+    def to_latitude(self):
+        return self.__to_latitude
 
     @property
     def score(self):
@@ -57,6 +65,8 @@ class PostFlightBody:
         self.__scheduled = data.get("scheduled")
         self.__price = data.get("price")
         self.__currency = data.get("currency")
-        self.__longitude = data.get("longitude")
-        self.__latitude = data.get("latitude")
+        self.__from_longitude = data.get("from_longitude")
+        self.__from_latitude = data.get("from_latitude")
+        self.__to_longitude = data.get("to_longitude")
+        self.__to_latitude = data.get("to_latitude")
         self.__score = data.get("score")

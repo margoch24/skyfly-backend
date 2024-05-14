@@ -12,14 +12,25 @@ class FlightsService:
         arrival: int,
         cabin_class: str,
         departure: int,
-        latitude: float,
-        longitude: float,
         page: int,
         price: float,
         limit: int,
+        from_latitude: float,
+        from_longitude: float,
+        to_latitude: float,
+        to_longitude: float,
     ):
         return get_flights(
-            arrival, cabin_class, departure, latitude, longitude, page, price, limit
+            arrival,
+            cabin_class,
+            departure,
+            page,
+            price,
+            limit,
+            from_latitude,
+            from_longitude,
+            to_latitude,
+            to_longitude,
         )
 
     def get_flight(flight_id):
@@ -30,26 +41,30 @@ class FlightsService:
         airline: str,
         cabin_class: str,
         departure: str,
-        latitude: float,
-        longitude: float,
         photo: str,
         score: float,
         scheduled: str,
         price: float,
         currency: str,
+        from_latitude: float,
+        from_longitude: float,
+        to_latitude: float,
+        to_longitude: float,
     ):
         return create_flight(
             arrival,
             airline,
             cabin_class,
             departure,
-            latitude,
-            longitude,
             photo,
             score,
             scheduled,
             price,
             currency,
+            from_latitude,
+            from_longitude,
+            to_latitude,
+            to_longitude,
         )
 
 
@@ -57,11 +72,13 @@ def get_flights(
     arrival: int,
     cabin_class: str,
     departure: int,
-    latitude: float,
-    longitude: float,
     page: int,
     price: float,
     limit: int,
+    from_latitude: float,
+    from_longitude: float,
+    to_latitude: float,
+    to_longitude: float,
 ):
     serialized_flights = []
 
@@ -78,9 +95,11 @@ def get_flights(
             arrival=arrival,
             cabin_class=cabin_class,
             departure=departure,
-            latitude=latitude,
-            longitude=longitude,
             price=price,
+            from_latitude=from_latitude,
+            from_longitude=from_longitude,
+            to_latitude=to_latitude,
+            to_longitude=to_longitude,
         )
 
         flights = Flight.find(
@@ -153,13 +172,15 @@ def create_flight(
     airline: str,
     cabin_class: str,
     departure: str,
-    latitude: float,
-    longitude: float,
     photo: str,
     score: float,
     scheduled: str,
     price: float,
     currency: str,
+    from_latitude: float,
+    from_longitude: float,
+    to_latitude: float,
+    to_longitude: float,
 ):
     try:
         admin_id = get_jwt_identity()
@@ -174,8 +195,10 @@ def create_flight(
             airline=airline,
             cabin_class=cabin_class,
             departure=departure,
-            latitude=latitude,
-            longitude=longitude,
+            from_latitude=from_latitude,
+            from_longitude=from_longitude,
+            to_latitude=to_latitude,
+            to_longitude=to_longitude,
             photo=photo,
             score=score,
             scheduled=scheduled,

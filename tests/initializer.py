@@ -19,7 +19,16 @@ from api.helpers import (
     milliseconds_to_iso,
 )
 from api.main import db, flask_app
-from api.models import Admin, Flight, Review, Seat, Ticket, TokenBlocklist, User
+from api.models import (
+    Admin,
+    Flight,
+    Review,
+    Seat,
+    Setting,
+    Ticket,
+    TokenBlocklist,
+    User,
+)
 from config import DefaultConfig, JWTConfig
 from tests.only_meta import OnlyMeta
 
@@ -189,8 +198,10 @@ def create_flights_with_tickets(user_id=None, additional_flight_data={}, tickets
         "cabin_class": CabinClass.FIRST,
         "departure": current_milli_time(),
         "arrival": current_milli_time() + 1000,
-        "latitude": 34.0573868,
-        "longitude": -118.3535625,
+        "from_latitude": 34.0573868,
+        "from_longitude": -118.3535625,
+        "to_latitude": 34.0573868,
+        "to_longitude": -118.3535625,
         "score": 8.5,
         "scheduled": Scheduled.DAILY,
         "price": 150,
@@ -240,4 +251,5 @@ __all__ = [
     isostring_to_milliseconds,
     update_scheduled_flights,
     milliseconds_to_iso,
+    Setting,
 ]

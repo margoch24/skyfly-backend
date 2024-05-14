@@ -26,8 +26,10 @@ class TestPostFlight(TestInitializer):
             "cabin_class": CabinClass.FIRST,
             "departure": 1713988800000,
             "arrival": 1713996000000,
-            "latitude": 34.0573868,
-            "longitude": -118.3535625,
+            "from_latitude": 34.0573868,
+            "from_longitude": -118.3535625,
+            "to_latitude": 34.0573868,
+            "to_longitude": -118.3535625,
             "score": 8.5,
             "scheduled": Scheduled.DAILY,
             "price": 150,
@@ -46,8 +48,10 @@ class TestPostFlight(TestInitializer):
         self.assertEqual(flight.get("cabin_class"), flight_params["cabin_class"])
         self.assertEqual(flight.get("departure"), flight_params["departure"])
         self.assertEqual(flight.get("arrival"), flight_params["arrival"])
-        self.assertEqual(flight.get("latitude"), flight_params["latitude"])
-        self.assertEqual(flight.get("longitude"), flight_params["longitude"])
+        self.assertEqual(flight.get("from_latitude"), flight_params["from_latitude"])
+        self.assertEqual(flight.get("from_longitude"), flight_params["from_longitude"])
+        self.assertEqual(flight.get("to_latitude"), flight_params["to_latitude"])
+        self.assertEqual(flight.get("to_longitude"), flight_params["to_longitude"])
         self.assertEqual(flight.get("score"), flight_params["score"])
         self.assertEqual(flight.get("scheduled"), flight_params["scheduled"])
         self.assertEqual(flight.get("price"), flight_params["price"])
@@ -68,8 +72,10 @@ class TestPostFlight(TestInitializer):
             "cabin_class": CabinClass.FIRST,
             "departure": 1713988800000,
             "arrival": 1713996000000,
-            "latitude": 34.0573868,
-            "longitude": -118.3535625,
+            "from_latitude": 34.0573868,
+            "from_longitude": -118.3535625,
+            "to_latitude": 34.0573868,
+            "to_longitude": -118.3535625,
             "score": 8.5,
             "scheduled": Scheduled.DAILY,
             "price": 150,
@@ -94,8 +100,10 @@ class TestPostFlight(TestInitializer):
             "cabin_class": "jjjj",
             "departure": "date",
             "arrival": "date",
-            "latitude": True,
-            "longitude": [],
+            "from_latitude": True,
+            "from_longitude": [],
+            "to_latitude": True,
+            "to_longitude": [],
             "score": 35,
             "scheduled": "hhh",
             "price": "ppp",
@@ -112,8 +120,10 @@ class TestPostFlight(TestInitializer):
         [cabinClassError] = parsed_response.data.get("cabin_class")
         [departureError] = parsed_response.data.get("departure")
         [arrivalError] = parsed_response.data.get("arrival")
-        [latitudeError] = parsed_response.data.get("latitude")
-        [longitudeError] = parsed_response.data.get("longitude")
+        [fromLatitudeError] = parsed_response.data.get("from_latitude")
+        [fromLongitudeError] = parsed_response.data.get("from_longitude")
+        [toLatitudeError] = parsed_response.data.get("to_latitude")
+        [toLongitudeError] = parsed_response.data.get("to_longitude")
         [scoreError] = parsed_response.data.get("score")
         [scheduledError] = parsed_response.data.get("scheduled")
         [priceError] = parsed_response.data.get("price")
@@ -123,8 +133,10 @@ class TestPostFlight(TestInitializer):
         self.assertEqual(cabinClassError, "Must be one of: business, economy, first.")
         self.assertEqual(departureError, "Not a valid integer.")
         self.assertEqual(arrivalError, "Not a valid integer.")
-        self.assertEqual(latitudeError, "Not a valid number.")
-        self.assertEqual(longitudeError, "Not a valid number.")
+        self.assertEqual(fromLatitudeError, "Not a valid number.")
+        self.assertEqual(fromLongitudeError, "Not a valid number.")
+        self.assertEqual(toLatitudeError, "Not a valid number.")
+        self.assertEqual(toLongitudeError, "Not a valid number.")
         self.assertEqual(
             scoreError,
             "Must be greater than or equal to 0 and less than or equal to 10.",
@@ -169,8 +181,10 @@ class TestPostFlight(TestInitializer):
             "cabin_class": CabinClass.FIRST,
             "departure": 1713988800000,
             "arrival": 1713996000000,
-            "latitude": 34.0573868,
-            "longitude": -118.3535625,
+            "from_latitude": 34.0573868,
+            "from_longitude": -118.3535625,
+            "to_latitude": 34.0573868,
+            "to_longitude": -118.3535625,
             "score": 8.5,
             "scheduled": Scheduled.DAILY,
             "price": 150,
@@ -197,8 +211,10 @@ class TestPostFlight(TestInitializer):
             "cabin_class": CabinClass.FIRST,
             "departure": 1713988800000,
             "arrival": 1713996000000,
-            "latitude": 34.0573868,
-            "longitude": -118.3535625,
+            "from_latitude": 34.0573868,
+            "from_longitude": -118.3535625,
+            "to_latitude": 34.0573868,
+            "to_longitude": -118.3535625,
             "score": 8.5,
             "scheduled": Scheduled.DAILY,
             "price": 150,
