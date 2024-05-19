@@ -252,11 +252,11 @@ class TestGetFlights(TestInitializer):
     def test_get_flights_by_arrival(self):
         headers = get_headers()
         user_id = headers.get("user_id")
-        one_day = 24 * 60 * 60 * 1000
+        one_hour = 60 * 60 * 1000
 
         create_flights_with_tickets(user_id=user_id)
 
-        arrival_flight_two = current_milli_time() + one_day
+        arrival_flight_two = current_milli_time() + one_hour
         create_flights_with_tickets(
             user_id=user_id,
             additional_flight_data={
@@ -265,7 +265,7 @@ class TestGetFlights(TestInitializer):
             },
         )
 
-        arrival_flight_three = current_milli_time() + one_day * 2
+        arrival_flight_three = current_milli_time() + one_hour * 2
         flight_three = create_flights_with_tickets(
             user_id=user_id,
             additional_flight_data={
@@ -407,7 +407,7 @@ class TestGetFlights(TestInitializer):
         create_flights_with_tickets(
             user_id=user_id,
             tickets=0,
-            additional_flight_data={"arrival": current_milli_time() - 1000},
+            additional_flight_data={"departure": current_milli_time() - 1000},
         )
 
         response = app.get("/flights", headers=headers)

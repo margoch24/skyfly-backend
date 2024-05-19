@@ -196,8 +196,8 @@ def create_flights_with_tickets(user_id=None, additional_flight_data={}, tickets
     flight_data = {
         "airline": "United",
         "cabin_class": CabinClass.FIRST,
-        "departure": current_milli_time(),
-        "arrival": current_milli_time() + 1000,
+        "departure": current_milli_time() + 1000,
+        "arrival": current_milli_time() + 2000,
         "from_latitude": 34.0573868,
         "from_longitude": -118.3535625,
         "to_latitude": 34.0573868,
