@@ -48,9 +48,9 @@ def prepare_condition_property(cls, key, value, config):
             comparative_condition.append(attribute.in_(value))
 
         case "datetime":
-            one_day_difference = 24 * 60 * 60 * 1000
-            min = value - one_day_difference
-            max = value + one_day_difference
+            one_hour_difference = 60 * 60 * 1000
+            min = value - one_hour_difference
+            max = value + one_hour_difference
 
             comparative_condition.append(attribute >= min)
             comparative_condition.append(attribute <= max)
