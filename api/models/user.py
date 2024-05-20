@@ -16,6 +16,7 @@ class User(BaseModel):
     is_deleted = db.Column(db.Boolean, default=False)
 
     ticket = db.relationship("Ticket", back_populates="user")
+    reviews = db.relationship("Review", back_populates="user")
 
     def __repr__(self):
         return f"<User {self.id}>"

@@ -14,14 +14,21 @@ class ReviewsService:
 
 def get_reviews():
     try:
-        reviews = Review.find(order_by=[Review.created_at.desc()])
+        reviews = Review.find(
+            order_by=[Review.created_at.desc()],
+            join=[
+                {"table": User, "condition": Review.user_id == User.id},
+            ],
+        )
     except Exception as e:
         print(f"ERROR (get_reviews): {e}")
 
         response = {"error": 1, "data": {"message": "Internal server error"}}
         return response, 500
 
-    serialized_reviews = [review.serialize() for review in reviews]
+    serialized_reviews = [
+        {**review.serialize(), "user": review.user.serialize()} for review in reviews
+    ]
 
     response = {
         "error": 0,
