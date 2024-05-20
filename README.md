@@ -130,7 +130,7 @@ ALTER USER 'skyfly'@'localhost' IDENTIFIED WITH mysql_native_password BY '[your 
 4. grant privileges to this user for database 'skyfly'
 
 ```bash
-GRANT ALL PRIVILEGES ON skyfly. * TO 'skylfy'@'localhost';
+GRANT ALL PRIVILEGES ON skyfly.* TO 'skylfy'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
@@ -164,7 +164,7 @@ ALTER USER 'test-skyfly'@'localhost' IDENTIFIED WITH mysql_native_password BY ''
 4. grant privileges to this user for database 'test_skyfly'
 
 ```bash
-GRANT ALL PRIVILEGES ON test_skyfly. * TO 'test-skylfy'@'localhost';
+GRANT ALL PRIVILEGES ON test_skyfly.* TO 'test-skylfy'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
