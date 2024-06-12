@@ -130,7 +130,7 @@ ALTER USER 'skyfly'@'localhost' IDENTIFIED WITH mysql_native_password BY '[your 
 4. grant privileges to this user for database 'skyfly'
 
 ```bash
-GRANT ALL PRIVILEGES ON skyfly. * TO 'skylfy'@'localhost';
+GRANT ALL PRIVILEGES ON skyfly.* TO 'skylfy'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
@@ -164,7 +164,7 @@ ALTER USER 'test-skyfly'@'localhost' IDENTIFIED WITH mysql_native_password BY ''
 4. grant privileges to this user for database 'test_skyfly'
 
 ```bash
-GRANT ALL PRIVILEGES ON test_skyfly. * TO 'test-skylfy'@'localhost';
+GRANT ALL PRIVILEGES ON test_skyfly.* TO 'test-skylfy'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
@@ -285,5 +285,3 @@ Add:
 ````bash
 sudo apt update
 sudo apt install code
-```In today's world, we rely a lot on gadgets and apps for convenience. They help us save time and do things from home. This app works the same way. It lets you buy flight tickets without going out. You can make an account, share your thoughts, leave reviews, and contact us at any time you want. Admins can create flights, check passengers and do other important things. So, no more waiting in lines or dealing with complicated bookings. Everything's easy with our app!
-````
