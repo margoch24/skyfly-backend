@@ -48,4 +48,4 @@ with flask_app.app_context:
 
 
 if __name__ == "__main__":
-    flask_app.run(debug=FlaskAppConfig.DEBUG, port=DefaultConfig.PORT)
+    flask_app.run(debug=FlaskAppConfig.DEBUG, port=DefaultConfig.PORT, host=DefaultConfig.HOST)

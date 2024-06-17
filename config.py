@@ -15,6 +15,7 @@ def get_dotenv_val(name):
 class DefaultConfig:
     SINGLE_TEST = get_dotenv_val("ONLY")
     PORT = get_dotenv_val("PORT")
+    HOST = get_dotenv_val("HOST")
     ENV = get_dotenv_val("ENV")
     DATABASE_URI = get_dotenv_val("DATABASE_URI")
     TEST_DATABASE_URI = get_dotenv_val("TEST_DATABASE_URI")
